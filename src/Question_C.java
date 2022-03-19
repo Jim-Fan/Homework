@@ -30,7 +30,9 @@ public class Question_C {
 	}
 	
 	/**
-	 * 0. If camera array is empty i.e. no node is covered, return false;
+	 * The required function:
+	 * 
+	 * 0. If camera array is empty i.e. no node can be covered, return false;
 	 * 1. For each city.nodes N:
 	 *    1.1. Check if N is member of camera array, if true, go to next N
 	 *    1.2. For each city.edges E:
@@ -38,6 +40,20 @@ public class Question_C {
 	 *         1.2.2 If E.rightNode is member of camera array && E.leftNode == N && E.weight <= 25, go to step 1
 	 *    1.3 Return false, as N is not covered
 	 * 2. Return true
+	 * 
+	 * 
+	 * Complexity of this function:
+	 * 
+	 * In step 1, each node is iterated. This makes the algorithm at least O(n).
+	 * 
+	 * Inside of this loop, the most expensive operation is not array membership
+	 * checking, which is another O(n) operation, but the potentially large
+	 * number of edge to iterate through.
+	 * 
+	 * By simple graph theory, max number of edge (i.e. nodes are maximally
+	 * connected to one and other) = n(n-1)/2 which is asymptotically O(n^2).
+	 * 
+	 * Therefore time complexity of this algorithm is O(n^3) and is polynomial.
 	 */
 	public static boolean cover(City city, int[] camera) {
 		
