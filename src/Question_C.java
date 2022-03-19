@@ -36,8 +36,8 @@ public class Question_C {
 	 * 1. For each city.nodes N:
 	 *    1.1. Check if N is member of camera array, if true, go to next N
 	 *    1.2. For each city.edges E:
-	 *         1.2.1 If E.leftNode is member of camera array && E.rightNode == N && E.weight <= 25, go to step 1
-	 *         1.2.2 If E.rightNode is member of camera array && E.leftNode == N && E.weight <= 25, go to step 1
+	 *         1.2.1 If E.leftNode is member of camera array && E.rightNode == N && E.weight <= 25, go to next edge
+	 *         1.2.2 If E.rightNode is member of camera array && E.leftNode == N && E.weight <= 25, go to next edge
 	 *    1.3 Return false, as N is not covered
 	 * 2. Return true
 	 * 
@@ -109,6 +109,7 @@ public class Question_C {
 		testCase_2();
 		testCase_3();
 		testCase_4();
+		testCase_5();
 		System.out.println("Finished without error");
 	}
 	
@@ -127,6 +128,9 @@ public class Question_C {
 		if (cover(city_1, camera_1)) {
 			throw new Exception("Case 1 failed");
 		}
+		else {
+			System.out.println("Case 1 passed");
+		}
 	}
 	
 	/**
@@ -141,7 +145,10 @@ public class Question_C {
 		City city_2 = new City(node_2, edge_2);
 		int[] camera_2 = new int[] { 0xA };
 		
-		if (! cover(city_2, camera_2)) {
+		if (cover(city_2, camera_2)) {
+			System.out.println("Case 2 passed");
+		}
+		else {
 			throw new Exception("Case 2 failed");
 		}
 	}
@@ -164,6 +171,9 @@ public class Question_C {
 		if (cover(city_3, camera_3)) {
 			throw new Exception("Case 3 failed");
 		}
+		else {
+			System.out.println("Case 3 passed");
+		}
 	}
 	
 	/**
@@ -181,8 +191,35 @@ public class Question_C {
 		City city_4 = new City(node_4, edge_4);
 		int[] camera_4 = new int[] { 0xA };
 		
-		if (! cover(city_4, camera_4)) {
+		if (cover(city_4, camera_4)) {
+			System.out.println("Case 4 passed");
+		}
+		else {
 			throw new Exception("Case 4 failed");
+		}
+	}
+	
+	/**
+	 * Test case 5
+	 * Given: City of three node: A-B-C, camera at A and B but C is connected to
+	 *        B with edge >  weight 25, thus C is not covered.
+	 * Expected outcome: cover() should return false
+	 */
+	public static void testCase_5() throws Exception {
+		
+		int[] node_5 = new int[] { 0xA, 0xB, 0xC };
+		Edge[] edge_5 = new Edge[] {
+				new Edge(0xA, 0xB, 1),
+				new Edge(0xB, 0xC, 30)
+		};
+		City city_5 = new City(node_5, edge_5);
+		int[] camera_5 = new int[] { 0xA, 0xB };
+		
+		if (cover(city_5, camera_5)) {
+			throw new Exception("Case 5 failed");
+		}
+		else {
+			System.out.println("Case 5 passed");
 		}
 	}
 }
